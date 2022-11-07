@@ -31,18 +31,27 @@ export default function Home() {
   const [collapsed, setCollapsed] = useState(true);
 
   const toDocx = async () => {
-    const res = await axios.post(
-      `${router.basePath}/api/download/html/`,
-      { HTML: HTML },
-      { responseType: "blob" }
-    );
-    const url = window.URL.createObjectURL(new Blob([res.data]));
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", "converted.docx");
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    try {
+      const res = await axios.post(
+        `${router.basePath}/api/download/html/`,
+        { HTML: HTML },
+        { responseType: "blob" }
+      );
+      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "converted.docx");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (e) {
+      showNotification({
+        title: "Error",
+        message: "An error occurred while downloading the file!",
+        icon: <BiError />,
+        color: "red",
+      });
+    }
   };
 
   useEffect(() => {
@@ -112,7 +121,7 @@ export default function Home() {
           }}
           id="rte"
           controls={[
-            ["bold", "italic", "underline"],
+            ["bold", "italic"],
             ["h1", "h2", "h3", "h4"],
             ["orderedList", "unorderedList"],
             ["image"],

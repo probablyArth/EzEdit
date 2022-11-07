@@ -18,10 +18,10 @@ const handler: NextApiHandler = async (req, res) => {
     python.stdin.end();
     python.stdout.on("data", console.log);
     python.stderr.on("data", (data) => {
-      console.error(data.toString());
+      // console.error(data.toString());
+      return res.end();
     });
     python.on("error", (data) => {
-      console.error(data);
       return res.end();
     });
     python.on("close", async (data) => {
