@@ -16,6 +16,7 @@ const handler: NextApiHandler = async (req, res) => {
     ]);
     python.stdin.write(HTML);
     python.stdin.end();
+    python.stdout.on("data", console.log);
     python.stderr.on("data", (data) => {
       console.error(data.toString());
     });
