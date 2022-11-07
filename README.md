@@ -13,3 +13,13 @@ A webapp with rich text editor to edit the docx file and translate that to html 
 Still there are a lot of missing formattings like equations, videos due to lack of library support, but it works good as a general document editor.
 
 [Youtube Demo](https://youtu.be/12Mw8mDX4GQ)
+
+## Running locally
+
+Clone the repo, cd into the project folder then run
+
+```
+yarn dev
+```
+
+and open `localhost:3000` on your browser
